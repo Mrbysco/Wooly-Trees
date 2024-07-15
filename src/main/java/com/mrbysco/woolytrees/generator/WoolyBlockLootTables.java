@@ -1,13 +1,11 @@
 package com.mrbysco.woolytrees.generator;
 
-import net.minecraft.advancements.critereon.EnchantmentPredicate;
-import net.minecraft.advancements.critereon.ItemEnchantmentsPredicate;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.ItemSubPredicates;
-import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -17,13 +15,9 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.neoforged.neoforge.common.Tags;
 
-import java.util.List;
 import java.util.Set;
 
 import static com.mrbysco.woolytrees.registry.WoolyRegistry.BLACK_WOOL_LEAVES;
@@ -49,17 +43,9 @@ import static com.mrbysco.woolytrees.registry.WoolyRegistry.YELLOW_WOOL_LEAVES;
 
 public class WoolyBlockLootTables extends BlockLootSubProvider {
 
-	protected WoolyBlockLootTables() {
-		super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+	protected WoolyBlockLootTables(HolderLookup.Provider provider) {
+		super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
 	}
-
-	private static final LootItemCondition.Builder HAS_SILK_TOUCH_ENCHANT = MatchTool.toolMatches(ItemPredicate.Builder.item().withSubPredicate(
-			ItemSubPredicates.ENCHANTMENTS,
-			ItemEnchantmentsPredicate.enchantments(List.of(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))))
-	));
-	private static final LootItemCondition.Builder HAS_SHEARS_TAG = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.TOOLS_SHEARS));
-	private static final LootItemCondition.Builder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS_TAG.or(HAS_SILK_TOUCH_ENCHANT);
-	public static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = HAS_SHEARS_OR_SILK_TOUCH.invert();
 
 	private final float[] DEFAULT_SAPLING_DROP_RATES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
 
@@ -82,22 +68,23 @@ public class WoolyBlockLootTables extends BlockLootSubProvider {
 		this.add(RED_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.RED_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
 		this.add(BLACK_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.BLACK_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
 
-		this.add(WOOLY_BEE_NEST.get(), BlockLootSubProvider::createBeeNestDrop);
+		this.add(WOOLY_BEE_NEST.get(), this::createBeeNestDrop);
 
 		this.dropSelf(WOOLY_SAPLING.get());
 		this.dropSelf(JEB_SAPLING.get());
 	}
 
-	protected static LootTable.Builder createSilkTouchOrShearsDispatchTable(Block block, LootPoolEntryContainer.Builder<?> builder) {
-		return createSelfDropDispatchTable(block, HAS_SHEARS_OR_SILK_TOUCH, builder);
+	protected LootTable.Builder createSilkTouchOrShearsDispatchTable(Block block, LootPoolEntryContainer.Builder<?> builder) {
+		return createSelfDropDispatchTable(block, HAS_SHEARS.or(hasSilkTouch()), builder);
 	}
 
 	protected LootTable.Builder dropWoolWithStringAndChance(Block wool, Block sapling, float... values) {
+		HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
 		return createSilkTouchOrShearsDispatchTable(wool, applyExplosionCondition(wool, LootItem.lootTableItem(sapling))
-				.when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.FORTUNE, values))).withPool(LootPool.lootPool()
-				.setRolls(ConstantValue.exactly(1)).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(wool, LootItem.lootTableItem(Items.STRING)
+				.when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), values))).withPool(LootPool.lootPool()
+				.setRolls(ConstantValue.exactly(1)).when(HAS_SHEARS.or(this.hasSilkTouch()).invert()).add(applyExplosionDecay(wool, LootItem.lootTableItem(Items.STRING)
 						.apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-						.when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.FORTUNE, 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))));
+						.when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))));
 	}
 
 	@Override

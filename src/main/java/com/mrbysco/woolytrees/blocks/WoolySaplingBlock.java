@@ -32,7 +32,7 @@ public class WoolySaplingBlock extends BushBlock implements BonemealableBlock {
 	public WoolySaplingBlock(TreeGrower treeGrower, Block.Properties properties) {
 		super(properties);
 		this.tree = treeGrower;
-		this.registerDefaultState(this.stateDefinition.any().setValue(STAGE, Integer.valueOf(0)));
+		this.registerDefaultState(this.stateDefinition.any().setValue(STAGE, 0));
 	}
 
 	@Override

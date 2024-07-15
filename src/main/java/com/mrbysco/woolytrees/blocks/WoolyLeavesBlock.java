@@ -9,7 +9,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -44,7 +43,7 @@ public class WoolyLeavesBlock extends LeavesBlock {
 			}
 		}
 
-		return state.setValue(DISTANCE, Integer.valueOf(i));
+		return state.setValue(DISTANCE, i);
 	}
 
 	private static int getDistance(BlockState neighbor) {
@@ -57,6 +56,6 @@ public class WoolyLeavesBlock extends LeavesBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return updateDistance(this.defaultBlockState().setValue(PERSISTENT, Boolean.valueOf(true)), context.getLevel(), context.getClickedPos());
+		return updateDistance(this.defaultBlockState().setValue(PERSISTENT, Boolean.TRUE), context.getLevel(), context.getClickedPos());
 	}
 }

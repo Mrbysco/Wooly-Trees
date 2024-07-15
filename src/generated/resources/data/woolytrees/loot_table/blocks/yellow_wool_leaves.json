@@ -16,7 +16,7 @@
                     {
                       "condition": "minecraft:match_tool",
                       "predicate": {
-                        "items": "#c:tools/shears"
+                        "items": "minecraft:shears"
                       }
                     },
                     {
@@ -25,7 +25,7 @@
                         "predicates": {
                           "minecraft:enchantments": [
                             {
-                              "enchantment": "minecraft:silk_touch",
+                              "enchantments": "minecraft:silk_touch",
                               "levels": {
                                 "min": 1
                               }
@@ -37,7 +37,7 @@
                   ]
                 }
               ],
-              "name": "minecraft:orange_wool"
+              "name": "minecraft:yellow_wool"
             },
             {
               "type": "minecraft:item",
@@ -74,7 +74,7 @@
               {
                 "condition": "minecraft:match_tool",
                 "predicate": {
-                  "items": "#c:tools/shears"
+                  "items": "minecraft:shears"
                 }
               },
               {
@@ -83,7 +83,7 @@
                   "predicates": {
                     "minecraft:enchantments": [
                       {
-                        "enchantment": "minecraft:silk_touch",
+                        "enchantments": "minecraft:silk_touch",
                         "levels": {
                           "min": 1
                         }
@@ -132,5 +132,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "woolytrees:blocks/orange_wool_leaves"
+  "random_sequence": "woolytrees:blocks/yellow_wool_leaves"
 }
