@@ -4,6 +4,7 @@ import com.mrbysco.woolytrees.Reference;
 import com.mrbysco.woolytrees.registry.WoolyRegistry;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import org.jetbrains.annotations.Nullable;
 
 public class WoolyLanguageProvider extends LanguageProvider {
 	public WoolyLanguageProvider(PackOutput output) {
@@ -35,5 +36,22 @@ public class WoolyLanguageProvider extends LanguageProvider {
 
 		add(WoolyRegistry.WOOLY_SAPLING.get(), "Wooly Sapling");
 		add(WoolyRegistry.JEB_SAPLING.get(), "Jeb_ Sapling");
+
+		addConfig("Server", "Server", "Server Settings");
+		addConfig("saplingFromSheep", "Sapling From Sheep", "When enabled you get the Wooly sapling from right-clicking a sheep");
+		addConfig("saplingPercentage", "Sapling Percentage", "The percentage in which you get the sapling [0.1 = 10%]");
+	}
+
+	/**
+	 * Add the translation for a config entry
+	 *
+	 * @param path        The path of the config entry
+	 * @param name        The name of the config entry
+	 * @param description The description of the config entry (optional in case of targeting "title" or similar entries that have no tooltip)
+	 */
+	private void addConfig(String path, String name, @Nullable String description) {
+		this.add(Reference.MOD_ID + ".configuration." + path, name);
+		if (description != null && !description.isEmpty())
+			this.add(Reference.MOD_ID + ".configuration." + path + ".tooltip", description);
 	}
 }
