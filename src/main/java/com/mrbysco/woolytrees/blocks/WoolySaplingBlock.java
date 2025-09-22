@@ -65,7 +65,7 @@ public class WoolySaplingBlock extends BushBlock implements BonemealableBlock {
 	 * Whether this IGrowable can grow
 	 */
 	@Override
-	public boolean isValidBonemealTarget(LevelReader p_256559_, BlockPos p_50898_, BlockState p_50899_) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
 		return true;
 	}
 

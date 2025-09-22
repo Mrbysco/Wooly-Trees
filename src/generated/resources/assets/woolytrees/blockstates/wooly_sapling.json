@@ -1,9 +1,6 @@
 {
   "variants": {
-    "stage=0": {
-      "model": "woolytrees:block/wooly_sapling"
-    },
-    "stage=1": {
+    "": {
       "model": "woolytrees:block/wooly_sapling"
     }
   }

@@ -18,11 +18,11 @@ public class WoolyLeavesBlock extends LeavesBlock {
 		super(properties.noOcclusion().isValidSpawn(WoolyLeavesBlock::ocelotOrParrot).isViewBlocking(WoolyLeavesBlock::never));
 	}
 
-	private static Boolean ocelotOrParrot(BlockState p_50822_, BlockGetter p_50823_, BlockPos p_50824_, EntityType<?> p_50825_) {
-		return p_50825_ == EntityType.OCELOT || p_50825_ == EntityType.PARROT;
+	private static Boolean ocelotOrParrot(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entityType) {
+		return entityType == EntityType.OCELOT || entityType == EntityType.PARROT;
 	}
 
-	private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
+	private static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {
 		return false;
 	}
 

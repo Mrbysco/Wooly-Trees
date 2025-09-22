@@ -8,15 +8,13 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 public class WoolyItemTagsProvider extends ItemTagsProvider {
 	public WoolyItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-	                             CompletableFuture<TagsProvider.TagLookup<Block>> tagLookup, @Nullable ExistingFileHelper existingFileHelper) {
-		super(output, lookupProvider, tagLookup, Reference.MOD_ID, existingFileHelper);
+	                             CompletableFuture<TagsProvider.TagLookup<Block>> tagLookup) {
+		super(output, lookupProvider, tagLookup, Reference.MOD_ID);
 	}
 
 	@Override

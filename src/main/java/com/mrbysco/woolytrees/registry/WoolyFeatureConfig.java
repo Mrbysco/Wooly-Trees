@@ -86,7 +86,7 @@ public class WoolyFeatureConfig {
 	public static BlockState getRandomLeaves() {
 		BlockState randomState = WoolyRegistry.GREEN_WOOL_LEAVES.get().defaultBlockState();
 
-		var tag = BuiltInRegistries.BLOCK.getTag(WoolyTags.WOOLY_LEAVES);
+		var tag = BuiltInRegistries.BLOCK.get(WoolyTags.WOOLY_LEAVES);
 		if (tag.isPresent() && tag.get().size() > 0) {
 			var randomBlock = tag.get().getRandomElement(rand);
 			if (randomBlock.isPresent()) {
@@ -98,7 +98,7 @@ public class WoolyFeatureConfig {
 
 	public static BlockState getRandomLog() {
 		BlockState randomState = Blocks.WHITE_WOOL.defaultBlockState();
-		var tag = BuiltInRegistries.BLOCK.getTag(WoolyTags.WOOLY_LOGS);
+		var tag = BuiltInRegistries.BLOCK.get(WoolyTags.WOOLY_LOGS);
 		if (tag.isPresent() && tag.get().size() > 0) {
 			var randomBlock = tag.get().getRandomElement(rand);
 			if (randomBlock.isPresent()) {

@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
@@ -78,8 +79,8 @@ public class WoolyRegistry {
 
 	public static final DeferredItem<BlockItem> WOOLY_BEE_NEST_ITEM = ITEMS.registerSimpleBlockItem(WOOLY_BEE_NEST);
 
-	public static final DeferredItem<SaplingBlockItem> WOOLY_SAPLING_ITEM = ITEMS.registerItem("wooly_sapling", (properties) -> new SaplingBlockItem(WOOLY_SAPLING.get(), properties));
-	public static final DeferredItem<BlockItem> JEB_SAPLING_ITEM = ITEMS.registerSimpleBlockItem(JEB_SAPLING);
+	public static final DeferredItem<SaplingBlockItem> WOOLY_SAPLING_ITEM = ITEMS.registerItem("wooly_sapling", (properties) -> new SaplingBlockItem(WOOLY_SAPLING.get(), properties), new Item.Properties().useBlockDescriptionPrefix());
+	public static final DeferredItem<BlockItem> JEB_SAPLING_ITEM = ITEMS.registerSimpleBlockItem(JEB_SAPLING, new Item.Properties().useBlockDescriptionPrefix());
 
 
 	public static final Supplier<CreativeModeTab> WOOLY_TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()

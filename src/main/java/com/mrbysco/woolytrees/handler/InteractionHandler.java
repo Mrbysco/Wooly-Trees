@@ -3,6 +3,7 @@ package com.mrbysco.woolytrees.handler;
 import com.mrbysco.woolytrees.config.WoolyConfig;
 import com.mrbysco.woolytrees.registry.WoolyRegistry;
 import com.mrbysco.woolytrees.registry.WoolyTags;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.player.Player;
@@ -25,7 +26,7 @@ public class InteractionHandler {
 					woolySapling = new ItemStack(WoolyRegistry.JEB_SAPLING.get());
 				}
 				//Drop item
-				sheep.spawnAtLocation(woolySapling, 0.5F);
+				sheep.spawnAtLocation((ServerLevel) event.getLevel(), woolySapling, 0.5F);
 
 				sheep.setSheared(true);
 				sheep.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);

@@ -1,6 +1,10 @@
 {
-  "parent": "woolytrees:block/wooly_bee_nest",
+  "parent": "minecraft:block/bee_nest_honey",
   "textures": {
-    "front": "woolytrees:block/wooly_bee_nest_front_honey"
+    "bottom": "woolytrees:block/wooly_bee_nest_bottom",
+    "front": "woolytrees:block/wooly_bee_nest_front_honey",
+    "particle": "woolytrees:block/wooly_bee_nest_side",
+    "side": "woolytrees:block/wooly_bee_nest_side",
+    "top": "woolytrees:block/wooly_bee_nest_top"
   }
 }
