@@ -18,5 +18,11 @@
   "block.woolytrees.wooly_bee_nest": "Wooly Bee Nest",
   "block.woolytrees.wooly_sapling": "Wooly Sapling",
   "block.woolytrees.yellow_wool_leaves": "Yellow Wool Leaves",
-  "itemGroup.woolytrees.tab": "Wooly Trees"
+  "itemGroup.woolytrees.tab": "Wooly Trees",
+  "woolytrees.configuration.Server": "Server",
+  "woolytrees.configuration.Server.tooltip": "Server Settings",
+  "woolytrees.configuration.saplingFromSheep": "Sapling From Sheep",
+  "woolytrees.configuration.saplingFromSheep.tooltip": "When enabled you get the Wooly sapling from right-clicking a sheep",
+  "woolytrees.configuration.saplingPercentage": "Sapling Percentage",
+  "woolytrees.configuration.saplingPercentage.tooltip": "The percentage in which you get the sapling [0.1 = 10%]"
 }
