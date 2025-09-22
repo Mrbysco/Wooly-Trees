@@ -1,5 +1,6 @@
 package com.mrbysco.woolytrees.blocks;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -8,14 +9,16 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class WoolyLeavesBlock extends LeavesBlock {
+	public static final MapCodec<WoolyLeavesBlock> CODEC = simpleCodec(WoolyLeavesBlock::new);
 
 	public WoolyLeavesBlock(Properties properties) {
-		super(properties.noOcclusion().isValidSpawn(WoolyLeavesBlock::ocelotOrParrot).isViewBlocking(WoolyLeavesBlock::never));
+		super(0.0F, properties.noOcclusion().isValidSpawn(WoolyLeavesBlock::ocelotOrParrot).isViewBlocking(WoolyLeavesBlock::never));
 	}
 
 	private static Boolean ocelotOrParrot(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entityType) {
@@ -24,6 +27,11 @@ public class WoolyLeavesBlock extends LeavesBlock {
 
 	private static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {
 		return false;
+	}
+
+	@Override
+	public MapCodec<? extends LeavesBlock> codec() {
+		return CODEC;
 	}
 
 	@Override
@@ -57,5 +65,10 @@ public class WoolyLeavesBlock extends LeavesBlock {
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return updateDistance(this.defaultBlockState().setValue(PERSISTENT, Boolean.TRUE), context.getLevel(), context.getClickedPos());
+	}
+
+	@Override
+	protected void spawnFallingLeavesParticle(Level level, BlockPos blockPos, RandomSource randomSource) {
+
 	}
 }

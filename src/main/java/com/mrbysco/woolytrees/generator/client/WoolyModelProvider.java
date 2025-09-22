@@ -53,7 +53,7 @@ public class WoolyModelProvider extends ModelProvider {
 		String path = original.getNamespace() + ":" + original.getPath().replace("block/", "");
 		ResourceLocation model = ModelTemplates.create(path).create(deferredBlock.get(), new TextureMapping(), blockModels.modelOutput);
 		blockModels.blockStateOutput.accept(
-				BlockModelGenerators.createSimpleBlock(deferredBlock.get(), model));
+				BlockModelGenerators.createSimpleBlock(deferredBlock.get(), BlockModelGenerators.plainVariant(model)));
 	}
 
 	public static final ModelTemplate BEE_NEST = ModelTemplates.create("bee_nest_empty", TextureSlot.PARTICLE, TextureSlot.FRONT, TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.FRONT, TextureSlot.SIDE);
@@ -80,10 +80,9 @@ public class WoolyModelProvider extends ModelProvider {
 				);
 		blockModels.blockStateOutput
 				.accept(
-						MultiVariantGenerator.multiVariant(deferredBlock.get())
-								.with(BlockModelGenerators.createHorizontalFacingDispatch())
-								.with(BlockModelGenerators.createEmptyOrFullDispatch(BeehiveBlock.HONEY_LEVEL, 5, model2, model))
-				);
+						MultiVariantGenerator.dispatch(deferredBlock.get())
+								.with(BlockModelGenerators.createEmptyOrFullDispatch(BeehiveBlock.HONEY_LEVEL, 5, BlockModelGenerators.plainVariant(model2), BlockModelGenerators.plainVariant(model)))
+								.with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING));
 	}
 
 	private void makeSapling(BlockModelGenerators blockModels, DeferredBlock<? extends Block> deferredBlock, ResourceLocation texture) {
@@ -91,7 +90,9 @@ public class WoolyModelProvider extends ModelProvider {
 
 		blockModels.blockStateOutput.accept(
 				BlockModelGenerators.createSimpleBlock(deferredBlock.get(),
-						cross.create(deferredBlock.get(), TextureMapping.cross(texture), blockModels.modelOutput)
+						BlockModelGenerators.plainVariant(
+								cross.create(deferredBlock.get(), TextureMapping.cross(texture), blockModels.modelOutput)
+						)
 				)
 		);
 		blockModels.registerSimpleItemModel(deferredBlock.asItem(), blockModels.createFlatItemModelWithBlockTexture(deferredBlock.asItem(), deferredBlock.get()));

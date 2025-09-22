@@ -5,7 +5,7 @@ import com.mrbysco.woolytrees.registry.WoolyRegistry;
 import com.mrbysco.woolytrees.registry.WoolyTags;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.animal.sheep.Sheep;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;

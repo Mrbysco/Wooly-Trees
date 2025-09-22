@@ -1,7 +1,5 @@
 package com.mrbysco.woolytrees.blocks;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -20,11 +18,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class WoolySaplingBlock extends BushBlock implements BonemealableBlock {
-	public static final MapCodec<WoolySaplingBlock> CODEC = RecordCodecBuilder.mapCodec(
-			instance -> instance.group(TreeGrower.CODEC.fieldOf("tree")
-							.forGetter(saplingBlock -> saplingBlock.tree), propertiesCodec())
-					.apply(instance, WoolySaplingBlock::new)
-	);
 	public static final IntegerProperty STAGE = BlockStateProperties.STAGE;
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
 	private final TreeGrower tree;
@@ -33,11 +26,6 @@ public class WoolySaplingBlock extends BushBlock implements BonemealableBlock {
 		super(properties);
 		this.tree = treeGrower;
 		this.registerDefaultState(this.stateDefinition.any().setValue(STAGE, 0));
-	}
-
-	@Override
-	protected MapCodec<? extends BushBlock> codec() {
-		return null;
 	}
 
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {

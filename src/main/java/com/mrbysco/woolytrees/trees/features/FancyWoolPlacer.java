@@ -23,21 +23,23 @@ public class FancyWoolPlacer extends FancyTrunkPlacer {
 	}
 
 	@Override
-	public boolean makeLimb(LevelSimulatedReader simulatedReader, BiConsumer<BlockPos, BlockState> stateBiConsumer, RandomSource random, BlockPos pos, BlockPos pos1, boolean p_161821_, TreeConfiguration treeConfiguration) {
-		if (p_161821_ || !Objects.equals(pos, pos1)) {
-			BlockPos blockpos = pos1.offset(-pos.getX(), -pos.getY(), -pos.getZ());
+	public boolean makeLimb(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter,
+	                        RandomSource random, BlockPos basePos, BlockPos offsetPos, boolean modifyWorld,
+	                        TreeConfiguration config) {
+		if (modifyWorld || !Objects.equals(basePos, offsetPos)) {
+			BlockPos blockpos = offsetPos.offset(-basePos.getX(), -basePos.getY(), -basePos.getZ());
 			int i = this.getSteps(blockpos);
 			float f = (float) blockpos.getX() / (float) i;
 			float f1 = (float) blockpos.getY() / (float) i;
 			float f2 = (float) blockpos.getZ() / (float) i;
 
 			for (int j = 0; j <= i; ++j) {
-				BlockPos offset = pos.offset(Mth.floor(0.5F + (float)j * f), Mth.floor(0.5F + (float)j * f1), Mth.floor(0.5F + (float)j * f2));
-				if (p_161821_) {
-					this.placeLog(simulatedReader, stateBiConsumer, random, offset, treeConfiguration, (state) -> {
+				BlockPos offset = basePos.offset(Mth.floor(0.5F + (float) j * f), Mth.floor(0.5F + (float) j * f1), Mth.floor(0.5F + (float) j * f2));
+				if (modifyWorld) {
+					this.placeLog(level, blockSetter, random, offset, config, (state) -> {
 						return state;
 					});
-				} else if (!this.isFree(simulatedReader, offset)) {
+				} else if (!this.isFree(level, offset)) {
 					return false;
 				}
 			}
