@@ -17,7 +17,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class WoolyGenerator {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent.Client event) {
@@ -32,9 +32,8 @@ public class WoolyGenerator {
 		));
 
 		generator.addProvider(true, new WoolyLootProvider(packOutput, lookupProvider));
-		WoolyBlockTagsProvider blockTags = new WoolyBlockTagsProvider(packOutput, lookupProvider);
-		generator.addProvider(true, blockTags);
-		generator.addProvider(true, new WoolyItemTagsProvider(packOutput, lookupProvider, blockTags.contentsGetter()));
+		generator.addProvider(true, new WoolyBlockTagsProvider(packOutput, lookupProvider));
+		generator.addProvider(true, new WoolyItemTagsProvider(packOutput, lookupProvider));
 
 		generator.addProvider(true, new WoolyLanguageProvider(packOutput));
 		generator.addProvider(true, new WoolyModelProvider(packOutput));

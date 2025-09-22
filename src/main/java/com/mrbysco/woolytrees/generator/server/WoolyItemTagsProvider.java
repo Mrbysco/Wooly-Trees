@@ -4,17 +4,14 @@ import com.mrbysco.woolytrees.Reference;
 import com.mrbysco.woolytrees.registry.WoolyTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 
 import java.util.concurrent.CompletableFuture;
 
 public class WoolyItemTagsProvider extends ItemTagsProvider {
-	public WoolyItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-	                             CompletableFuture<TagsProvider.TagLookup<Block>> tagLookup) {
-		super(output, lookupProvider, tagLookup, Reference.MOD_ID);
+	public WoolyItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+		super(output, lookupProvider, Reference.MOD_ID);
 	}
 
 	@Override
