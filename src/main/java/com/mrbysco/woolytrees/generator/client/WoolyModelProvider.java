@@ -12,7 +12,7 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -49,9 +49,9 @@ public class WoolyModelProvider extends ModelProvider {
 		makeSapling(blockModels, WoolyRegistry.JEB_SAPLING, modLocation("block/jeb_sapling"));
 	}
 
-	private void makeLeaves(BlockModelGenerators blockModels, DeferredBlock<? extends Block> deferredBlock, ResourceLocation original) {
+	private void makeLeaves(BlockModelGenerators blockModels, DeferredBlock<? extends Block> deferredBlock, Identifier original) {
 		String path = original.getNamespace() + ":" + original.getPath().replace("block/", "");
-		ResourceLocation model = ModelTemplates.create(path).create(deferredBlock.get(), new TextureMapping(), blockModels.modelOutput);
+		Identifier model = ModelTemplates.create(path).create(deferredBlock.get(), new TextureMapping(), blockModels.modelOutput);
 		blockModels.blockStateOutput.accept(
 				BlockModelGenerators.createSimpleBlock(deferredBlock.get(), BlockModelGenerators.plainVariant(model)));
 	}
@@ -66,8 +66,8 @@ public class WoolyModelProvider extends ModelProvider {
 				.put(TextureSlot.TOP, modLocation("block/" + path + "_top"))
 				.put(TextureSlot.FRONT, modLocation("block/" + path + "_front"))
 				.put(TextureSlot.SIDE, modLocation("block/" + path + "_side"));
-		ResourceLocation model = BEE_NEST.create(deferredBlock.get(), mapping, blockModels.modelOutput);
-		ResourceLocation model2 = BEE_NEST_HONEY.createWithSuffix(deferredBlock.get(), "_honey",
+		Identifier model = BEE_NEST.create(deferredBlock.get(), mapping, blockModels.modelOutput);
+		Identifier model2 = BEE_NEST_HONEY.createWithSuffix(deferredBlock.get(), "_honey",
 				mapping.copyAndUpdate(TextureSlot.FRONT, modLocation("block/" + path + "_front_honey")),
 				blockModels.modelOutput);
 
@@ -85,7 +85,7 @@ public class WoolyModelProvider extends ModelProvider {
 								.with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING));
 	}
 
-	private void makeSapling(BlockModelGenerators blockModels, DeferredBlock<? extends Block> deferredBlock, ResourceLocation texture) {
+	private void makeSapling(BlockModelGenerators blockModels, DeferredBlock<? extends Block> deferredBlock, Identifier texture) {
 		ModelTemplate cross = ModelTemplates.CROSS.extend().renderType("cutout").build();
 
 		blockModels.blockStateOutput.accept(
