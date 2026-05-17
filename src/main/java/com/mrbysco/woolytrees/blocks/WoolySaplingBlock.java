@@ -58,7 +58,7 @@ public class WoolySaplingBlock extends BushBlock implements BonemealableBlock {
 	}
 
 	public boolean isBonemealSuccess(Level level, RandomSource rand, BlockPos pos, BlockState state) {
-		return (double) level.random.nextFloat() < 0.45D;
+		return (double) level.getRandom().nextFloat() < 0.45D;
 	}
 
 	public void performBonemeal(ServerLevel level, RandomSource rand, BlockPos pos, BlockState state) {

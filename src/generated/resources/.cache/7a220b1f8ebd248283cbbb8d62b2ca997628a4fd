@@ -1,4 +1,4 @@
-// 1.21.11	2026-03-04T23:55:07.671477	Model Definitions - woolytrees
+// 26.1.2	2026-05-17T18:14:07.4007097	Model Definitions - woolytrees
 b244639153b7c66ca6e368a3f30593e546e4838c assets/woolytrees/blockstates/black_wool_leaves.json
 3c126336dcf7f39ec57be43702380ed24c3a44cf assets/woolytrees/blockstates/blue_wool_leaves.json
 b6a9dd9fb3d7f766605a49f4d4a3386dcea88c64 assets/woolytrees/blockstates/brown_wool_leaves.json
@@ -43,7 +43,7 @@ bfd4acc51568d85c315eb079c3aff2bdda433711 assets/woolytrees/models/block/black_wo
 35af5dff992c8f5e413a6c9a1899daf9af0c2109 assets/woolytrees/models/block/cyan_wool_leaves.json
 ff50d4b007c476869de65971097e8a27f7bf3fc6 assets/woolytrees/models/block/gray_wool_leaves.json
 4638f00853aaf3b6d9cd500386e4f7cb72111c90 assets/woolytrees/models/block/green_wool_leaves.json
-9d53cf765fa7beceee9c386bfa7247a3391ec034 assets/woolytrees/models/block/jeb_sapling.json
+90f868b4a0e225170a68688767d821e583fa7d80 assets/woolytrees/models/block/jeb_sapling.json
 3197c70d82b617e4a5fcf16dfdccba1f0011761c assets/woolytrees/models/block/light_blue_wool_leaves.json
 1de996c9a28ac5155ee2b6b364ec1363ff7b7035 assets/woolytrees/models/block/light_gray_wool_leaves.json
 d77113fc4945e34a9ad066a89317cfcc24bd758a assets/woolytrees/models/block/lime_wool_leaves.json
@@ -55,7 +55,7 @@ e8289b2e9bad9530f05b83eac4a74824e99ad5a6 assets/woolytrees/models/block/purple_w
 d01cf17d6f6256b93a8d28df56bbf3ffe9083fbc assets/woolytrees/models/block/white_wool_leaves.json
 fdd66f7673dc6ca481007842ccd0b25e96e580b4 assets/woolytrees/models/block/wooly_bee_nest.json
 0b1dbfa8b4c5c21865fc7ee7e9f850e97b52e8c6 assets/woolytrees/models/block/wooly_bee_nest_honey.json
-a57979cb8ae856bdbf4052657061296eebec7d89 assets/woolytrees/models/block/wooly_sapling.json
+3fa8d3f95088039f37a83dd53ef3570ffe445f12 assets/woolytrees/models/block/wooly_sapling.json
 821d39d8eb7c6e3ab7e8f1a9099617927c89ec51 assets/woolytrees/models/block/yellow_wool_leaves.json
 5fb004d937b52d94147c30752f4b08ae1c21063c assets/woolytrees/models/item/jeb_sapling.json
 b29d6f0e75ab8112d58914ed4b022530ea529e4b assets/woolytrees/models/item/wooly_sapling.json

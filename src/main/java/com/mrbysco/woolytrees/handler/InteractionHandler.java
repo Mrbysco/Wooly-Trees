@@ -16,7 +16,8 @@ public class InteractionHandler {
 	public void onWorldTick(PlayerInteractEvent.EntityInteract event) {
 		if (event.getSide().isServer() && WoolyConfig.SERVER.saplingFromSheep.get() && event.getTarget() instanceof Sheep sheep) {
 			Player player = event.getEntity();
-			if (event.getLevel().random.nextDouble() <= WoolyConfig.SERVER.saplingPercentage.get() && !sheep.isSheared() && event.getItemStack().is(WoolyTags.CONVERTING_SAPLING)) {
+			if (event.getLevel().getRandom().nextDouble() <= WoolyConfig.SERVER.saplingPercentage.get() &&
+					!sheep.isSheared() && event.getItemStack().is(WoolyTags.CONVERTING_SAPLING)) {
 				if (!player.getAbilities().instabuild) {
 					ItemStack interactStack = event.getItemStack();
 					interactStack.shrink(1);

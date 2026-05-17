@@ -11,6 +11,7 @@ import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.BeehiveBlock;
@@ -61,14 +62,14 @@ public class WoolyModelProvider extends ModelProvider {
 
 	private void makeNest(BlockModelGenerators blockModels, DeferredBlock<? extends Block> deferredBlock) {
 		String path = deferredBlock.getId().getPath();
-		TextureMapping mapping = TextureMapping.particle(modLocation("block/" + path + "_side"))
-				.put(TextureSlot.BOTTOM, modLocation("block/" + path + "_bottom"))
-				.put(TextureSlot.TOP, modLocation("block/" + path + "_top"))
-				.put(TextureSlot.FRONT, modLocation("block/" + path + "_front"))
-				.put(TextureSlot.SIDE, modLocation("block/" + path + "_side"));
+		TextureMapping mapping = TextureMapping.particle(new Material(modLocation("block/" + path + "_side")))
+				.put(TextureSlot.BOTTOM, new Material(modLocation("block/" + path + "_bottom")))
+				.put(TextureSlot.TOP, new Material(modLocation("block/" + path + "_top")))
+				.put(TextureSlot.FRONT, new Material(modLocation("block/" + path + "_front")))
+				.put(TextureSlot.SIDE, new Material(modLocation("block/" + path + "_side")));
 		Identifier model = BEE_NEST.create(deferredBlock.get(), mapping, blockModels.modelOutput);
 		Identifier model2 = BEE_NEST_HONEY.createWithSuffix(deferredBlock.get(), "_honey",
-				mapping.copyAndUpdate(TextureSlot.FRONT, modLocation("block/" + path + "_front_honey")),
+				mapping.copyAndUpdate(TextureSlot.FRONT, new Material(modLocation("block/" + path + "_front_honey"))),
 				blockModels.modelOutput);
 
 		blockModels.itemModelOutput
@@ -86,12 +87,10 @@ public class WoolyModelProvider extends ModelProvider {
 	}
 
 	private void makeSapling(BlockModelGenerators blockModels, DeferredBlock<? extends Block> deferredBlock, Identifier texture) {
-		ModelTemplate cross = ModelTemplates.CROSS.extend().renderType("cutout").build();
-
 		blockModels.blockStateOutput.accept(
 				BlockModelGenerators.createSimpleBlock(deferredBlock.get(),
 						BlockModelGenerators.plainVariant(
-								cross.create(deferredBlock.get(), TextureMapping.cross(texture), blockModels.modelOutput)
+								ModelTemplates.CROSS.create(deferredBlock.get(), TextureMapping.cross(new Material(texture)), blockModels.modelOutput)
 						)
 				)
 		);
